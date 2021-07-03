@@ -12,6 +12,7 @@ import { hash, compare } from 'bcryptjs'
 import { User } from './entity/User'
 import { MyContext } from './MyContext'
 import { createAccessToken, createRefreshToken } from './auth'
+import { sendRefreshToken } from './sendRefreshToken'
 import { isAuth } from './isAuth'
 
 @ObjectType()
@@ -57,9 +58,7 @@ export class UserResolver {
 
         // succesfful login -> provide token
 
-        res.cookie('jid', createRefreshToken(user), {
-            httpOnly: true
-        })
+        sendRefreshToken(res, createRefreshToken(user))
 
         return {
             accessToken: createAccessToken(user)
