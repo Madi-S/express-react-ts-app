@@ -12,6 +12,7 @@ import { hash, compare } from 'bcryptjs'
 import { User } from './entity/User'
 import { MyContext } from './MyContext'
 import { createAccessToken, createRefreshToken } from './auth'
+import { isAuth } from './isAuth'
 
 @ObjectType()
 class LoginResponse {
@@ -27,9 +28,10 @@ export class UserResolver {
     }
 
     @Query(() => String)
-    @UseMiddleware()
-    bye() {
-        return 'Bye!'
+    @UseMiddleware(isAuth)
+    bye(@Ctx() { payload }: MyContext) {
+        console.log(payload)
+        return `Your user id is ${payload!.userId}`
     }
 
     @Query(() => [User])
