@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { InMemoryCache, ApolloClient } from '@apollo/client'
 import { ApolloProvider } from '@apollo/react-hooks'
-import App from './App'
+import { Routes } from './Routes'
 
 const client = new ApolloClient({
     uri: 'http://localhost:8000/graphql',
@@ -11,7 +11,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
     <ApolloProvider client={client}>
-        <App />
+        <Routes />
     </ApolloProvider>,
     document.getElementById('root')
 )
