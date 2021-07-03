@@ -16,3 +16,6 @@
 6) `npm start`
 7) `npm i express apollo-server-express graphql`
 8) `npm i -D @types/express @types/graphql`
+9) `npm i type-graphql`
+10) `npm i bcryptjs`
+11) `npm i -D @types/bcryptjs`
