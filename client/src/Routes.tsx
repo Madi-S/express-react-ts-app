@@ -1,14 +1,32 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-// import { useQuery } from '@apollo/react-hooks'
-// import { useHelloQuery } from './generated/graphql'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Register from './pages/Register'
 
 export const Routes: React.FC = () => {
     return (
         <Router>
-            <Switch>
-                <Route exact path='/' render={() => <div>howdy</div>} />
-            </Switch>
+            <div>
+                <header>
+                    <div className='home'>
+                        <div>
+                            <Link to='/'>Home</Link>
+                        </div>
+                        <div>
+                            <Link to='/register'>Register</Link>
+                        </div>
+                        <div>
+                            <Link to='/login'>Login</Link>
+                        </div>
+                    </div>
+                </header>
+                <Switch>
+                    <Route exact path='/' component={Home} />
+                    <Route exact path='/register' component={Register} />
+                    <Route exact path='/login' component={Login} />
+                </Switch>
+            </div>
         </Router>
     )
 }
