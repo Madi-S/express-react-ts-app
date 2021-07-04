@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useRegisterMutation } from '../generated/graphql'
 
-
-const Register: React.FC<RouteComponentProps> = ({history}) => {
+const Register: React.FC<RouteComponentProps> = ({ history }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [register] = useRegisterMutation()
@@ -11,10 +10,15 @@ const Register: React.FC<RouteComponentProps> = ({history}) => {
         e.preventDefault()
         console.log('Form submitted', email, password)
 
-        const response = await register({ variables: { email, password } })
-        console.log(response)
-        if (response.data && response.data.register) {
-            history.push('/')
+        try {
+            const response = await register({ variables: { email, password } })
+            console.log(response)
+
+            if (response.data && response.data.register) {
+                history.push('/')
+            }
+        } catch (err) {
+            alert(`Registration failed ${err}`)
         }
     }
 

@@ -1,9 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { RouteComponentProps } from 'react-router-dom'
+import { useLoginMutation } from '../generated/graphql'
 
-interface Props {}
+const Login: React.FC<RouteComponentProps> = ({ history }) => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [login] = useLoginMutation()
 
-const Login: React.FC<Props> = () => {
-    return <div className='login'>Login Page</div>
+    const onSubmit = async (e: { preventDefault: () => void }) => {
+        e.preventDefault()
+        console.log('Form submitted', email, password)
+
+        try {
+            const response = await login({ variables: { email, password } })
+            console.log(response)
+        } catch (err) {
+            alert(`Login failed: ${err}`)
+        }
+
+        // if (response.data && response.data.login.accessToken) {
+        //     history.push('/')
+        // }
+    }
+
+    return (
+        <form onSubmit={onSubmit}>
+            <div>
+                <input
+                    type='text'
+                    placeholder='test@test.com'
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type='password'
+                    placeholder='********'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                />
+            </div>
+            <button type='submit'>Login</button>
+        </form>
+    )
 }
 
 export default Login

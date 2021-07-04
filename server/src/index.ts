@@ -36,7 +36,7 @@ import { sendRefreshToken } from './sendRefreshToken'
         if (!user) {
             return res.send({ ok: false, accessToken: '' })
         }
-        
+
         if (user.tokenVersion != payload.tokenVersion) {
             return res.send({ ok: false, accessToken: '' })
         }
@@ -55,7 +55,7 @@ import { sendRefreshToken } from './sendRefreshToken'
         context: ({ req, res }) => ({ req, res })
     })
 
-    apolloServer.applyMiddleware({ app })
+    apolloServer.applyMiddleware({ app, cors: false })
 
     app.listen(8000, () => {
         console.log('Server started')
