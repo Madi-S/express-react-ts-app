@@ -20,15 +20,12 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
 
             if (response && response.data) {
                 setAccessToken(response.data.login.accessToken)
+                history.push('/')
             }
 
         } catch (err) {
             alert(`Login failed: ${err}`)
         }
-
-        // if (response.data && response.data.login.accessToken) {
-        //     history.push('/')
-        // }
     }
 
     return (

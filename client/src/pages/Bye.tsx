@@ -5,7 +5,9 @@ interface Props {}
 
 const Home: React.FC<Props> = () => {
     // bye data is protected with authentication
-    const { data, loading, error } = useByeQuery()
+    const { data, loading, error } = useByeQuery({
+        fetchPolicy: 'network-only'
+    })
 
     if (loading) {
         return <div>Loading ...</div>
