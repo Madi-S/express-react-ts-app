@@ -1,5 +1,3 @@
-"# Fullstack-Project" 
-
 ## Create server
 
 1) `npm i -g typeorm`

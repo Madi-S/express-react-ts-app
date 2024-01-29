@@ -2,8 +2,6 @@ import { verify } from 'jsonwebtoken'
 import { MiddlewareFn } from 'type-graphql'
 import { MyContext } from './MyContext'
 
-// bearer <acutal token>
-
 export const isAuth: MiddlewareFn<MyContext> = ({ context }, next) => {
     const authorization = context.req.headers['authorization']
 
